@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.eb-garamond-font{
+  font-family: "EB Garamond", serif;
+  font-optical-sizing: auto;
+font-style: normal;
+}
