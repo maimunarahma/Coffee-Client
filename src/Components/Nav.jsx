@@ -17,10 +17,14 @@ const Nav = () => {
 
 <h1 className='eb-garamond-font italic font-bold text-xl'>Espresso Emporium</h1>
                 </div>
+                {user && 
+                <Link to='/myProfile'><button className='btn bg-[#E3B577] border-black'>My Profile</button></Link>
+                }
                 <div className='flex justify-end navbar-end'>
                     {
                         user?<>
-                        <h1>{user.email}</h1>
+                        <img src={user.photoURL} alt="" className='w-10 h-10 border-2 border-[#b0885271] rounded-full' />
+                        {/* <h1 className='text-white'>{user.email}</h1> */}
                         <button className='btn bg-[#E3B577] border-2 border-black' onClick={ signOutUser}>Sign Out</button></>:
                         <Link to='/login'><button className='btn bg-[#E3B577] border-black'>Login</button></Link>
                     }

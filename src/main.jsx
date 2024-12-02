@@ -14,12 +14,17 @@ import Details from './Components/Details';
 import Authentication from './Provider/Authentication';
 import Login from './Components/Login';
 import Register from './Components/Register';
+import PrivetRoute from './Components/PrivetRoute';
+import MyProfile from './Components/MyProfile';
+import UpdateProfile from './Components/UpdateProfile';
+import Error from './Components/Error';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root></Root>,
+    errorElement:<Error></Error>,
     children:
     [{
       
@@ -28,7 +33,7 @@ const router = createBrowserRouter([
       loader:()=>fetch('http://localhost:4000/addCoffee')
     },{
       path:'/addCoffee',
-      element:<AddCoffee></AddCoffee>
+      element:<PrivetRoute><AddCoffee></AddCoffee></PrivetRoute> 
     },{
       path:'/update/:id',
       element:<Update></Update>,
@@ -46,6 +51,13 @@ const router = createBrowserRouter([
     {
       path:'/register',
       element:<Register></Register>
+    },
+    {
+      path:'/myProfile',
+      element:<MyProfile></MyProfile>
+    },{
+      path:'/update',
+      element:<UpdateProfile></UpdateProfile>
     }
   ]
   },

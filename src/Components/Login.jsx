@@ -1,11 +1,12 @@
 import  { useContext } from 'react';
 import { AuthContext } from '../Provider/Authentication';
 import { auth } from './Firebase.init';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
     const { login} =useContext(AuthContext);
-    
+    const navigate=useNavigate();
     const LoginFrom=e=>{
         e.preventDefault();
         const form=e.target;
@@ -16,6 +17,25 @@ const Login = () => {
         login(auth,email,password)
 
     }
+   const handleGoogleSignIn=()=>{
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider)
+  .then((result) => {
+   
+    const user = result.user;
+    console.log(user);
+    
+    navigate('/');
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    
+    const errorMessage = error.message;
+    console.log(errorMessage)
+   
+  });
+
+   }
     return (
         <div className='mt-5'>
               <Link to='/'> <button className="btn">Back to Home</button></Link>
@@ -27,6 +47,8 @@ const Login = () => {
                <input type="text"  name='password' placeholder='your password' required className='my-2 p-5 rounded-xl border-2'/>
                <button className='btn bg-[#E3B577]'>Login</button>
                <p className='mt-5'><span className='font-bold text-red-500'>Not Registered?</span> <Link to='/register'> <span className='font-bold'> Register</span></Link></p>
+               <h1>Or</h1>
+               <button className='btn' onClick={handleGoogleSignIn}>Sign in With Google</button>
                </div>
               
              
